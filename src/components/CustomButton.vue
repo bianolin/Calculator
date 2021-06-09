@@ -1,6 +1,6 @@
 <template>
-  <div class="CusBtnMain" v-bind:class="sIsWideBtn()">
-    <button class="CustBtnMainBtn" v-bind:class="btnType" >
+  <div class="CusBtnMain" v-bind:class="sClassIsEmptyBlock()">
+    <button class="CustBtnMainBtn" v-bind:class="btnType" v-if="!isEmptySpace">
       {{btnText}}
     </button>
   </div>
@@ -13,20 +13,17 @@ export default {
   components: {
   },
   props: {
-    btnText: String,
-    btnType: String,
-    isWide: {
+    btnText: {},
+    btnType: {},
+    isEmptySpace: {
       type: Boolean,
       default: false
     },
   },
-  created() {
-    return 0;
-  },
   methods: {
-    sIsWideBtn: function() {
-      if (this.isWide==="true") {
-        return "CusBtnMainWide";
+    sClassIsEmptyBlock: function() {
+      if (this.isEmptySpace==="true") {
+        return "CustBtnEmpty";
       }
       else{
         return "";
@@ -37,6 +34,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.CustBtnEmpty{
+  flex: 1;
+  min-width: 100%;
+  background-color: transparent;
+}
 .CusBtnMain{
   flex: 1;
   display: inline-block;
@@ -44,8 +46,6 @@ export default {
   max-height: 120px;
   max-width: 120px;
   min-width: 100px;
-  // min-width: 80px;
-  // min-height: 80px;
   width: 100%;
   height: 100%;
   .CusBtnMain_Num{

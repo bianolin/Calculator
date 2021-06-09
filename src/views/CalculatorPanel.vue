@@ -30,18 +30,17 @@ export default {
   // background-color:darkorange;
   .PanelMainTop{
     height: 16%;
+    margin-top: 15%;
     margin-left: 2%;
     margin-right: 2%;
     background-image: linear-gradient(lightgray, lightblue);
     border-radius: 3px;
   }
   .PanelMainButtonArea{
-    height: 84%;
-    width: 100%;
+    height: 66%;
     margin-left: 2%;
     margin-right: 2%;
-    // background-color:lightcoral;
-    padding-top: 2%;
+    padding-top: 10%;
   }
 }
 </style>
