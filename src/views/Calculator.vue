@@ -32,6 +32,7 @@ export default {
   width: 100%;
   background-color: lightgray;
   display: flex;
+  flex-direction: row;
   .CalArea{
     flex: 5;
     height: 100%;

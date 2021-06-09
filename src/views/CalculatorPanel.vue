@@ -25,6 +25,7 @@ export default {
 .PanelMain{
   box-sizing: border-box;
   height: 100%;
+  width: 100%;
   padding: 3%;
   // background-color:darkorange;
   .PanelMainTop{
@@ -36,6 +37,9 @@ export default {
   }
   .PanelMainButtonArea{
     height: 84%;
+    width: 100%;
+    margin-left: 2%;
+    margin-right: 2%;
     // background-color:lightcoral;
     padding-top: 2%;
   }
