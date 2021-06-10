@@ -1,12 +1,17 @@
 <template>
   <div class="CusBtnMain" v-bind:class="sClassIsEmptyBlock()">
-    <button class="CustBtnMainBtn" v-bind:class="btnType" v-if="!isEmptySpace">
+    <button class="CustBtnMainBtn" 
+      v-bind:class="btnType" 
+      v-if="!isEmptySpace"
+      v-on:click="onButtonClicked()"
+    >
       {{btnText}}
     </button>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 
 export default {
   name: 'CustomButton',
@@ -21,12 +26,26 @@ export default {
     },
   },
   methods: {
+    ...mapActions({
+      actNumClick: 'actNumBtnClicked',
+      actSgnBtnClicked: 'actSignBtnClick',
+      actClrBtnClicked: 'actClrBtnClick'
+    }),
     sClassIsEmptyBlock: function() {
       if (this.isEmptySpace==="true") {
         return "CustBtnEmpty";
       }
       else{
         return "";
+      }
+    },
+    onButtonClicked: function() {
+      if (this.btnType === 'CusBtnMain_Num'){
+        this.actNumClick(this.btnText);
+      } else if (this.btnType === 'CusBtnMain_Sgn') {
+        this.actSignBtnClick(this.btnText);
+      } else {
+        this.actClrBtnClick(this.btnText)
       }
     }
   }

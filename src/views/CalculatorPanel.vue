@@ -1,6 +1,10 @@
 <template>
   <div class="PanelMain">
+    <div class="PanelMainTopRcrd">
+      {{getRsltScrnLeftVal}}{{getRsltScrnSign}}{{getRsltScrnRghtVal}}
+    </div>
     <div class="PanelMainTop">
+      {{getRsltScrnVal}}
     </div>
     <div class="PanelMainButtonArea">
       <CalculatorPanelBtnArea/>
@@ -12,11 +16,20 @@
 <script>
 // @ is an alias to /src
 import CalculatorPanelBtnArea from '@/views/CalculatorPanelBtnArea.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'CalculatorPanel',
   components: {
     CalculatorPanelBtnArea
+  },
+  computed: {
+    ...mapGetters([
+      'getRsltScrnVal',
+      'getRsltScrnLeftVal',
+      'getRsltScrnRghtVal',
+      'getRsltScrnSign'
+    ])
   }
 }
 </script>
@@ -28,9 +41,15 @@ export default {
   width: 100%;
   padding: 3%;
   // background-color:darkorange;
+  .PanelMainTopRcrd{
+    height: 8%;
+    margin-left: 2%;
+    margin-right: 2%;
+    background-color: aquamarine;
+  }
   .PanelMainTop{
     height: 16%;
-    margin-top: 15%;
+    margin-top: 2%;
     margin-left: 2%;
     margin-right: 2%;
     background-image: linear-gradient(lightgray, lightblue);
