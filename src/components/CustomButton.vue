@@ -28,8 +28,8 @@ export default {
   methods: {
     ...mapActions({
       actNumClick: 'actNumBtnClicked',
-      actSgnBtnClicked: 'actSignBtnClick',
-      actClrBtnClicked: 'actClrBtnClick'
+      actOperatorBtnClick: 'actOperatorBtnClicked',
+      actClrBtnClick: 'actClrBtnClicked'
     }),
     sClassIsEmptyBlock: function() {
       if (this.isEmptySpace==="true") {
@@ -43,7 +43,7 @@ export default {
       if (this.btnType === 'CusBtnMain_Num'){
         this.actNumClick(this.btnText);
       } else if (this.btnType === 'CusBtnMain_Sgn') {
-        this.actSignBtnClick(this.btnText);
+        this.actOperatorBtnClick(this.btnText);
       } else {
         this.actClrBtnClick(this.btnText)
       }

@@ -1,7 +1,7 @@
 <template>
   <div class="PanelMain">
     <div class="PanelMainTopRcrd">
-      {{getRsltScrnLeftVal}}{{getRsltScrnSign}}{{getRsltScrnRghtVal}}
+      {{getRsltScrnLeftVal}}{{getRsltScrnOperator}}{{getRsltScrnRghtVal}}
     </div>
     <div class="PanelMainTop">
       {{getRsltScrnVal}}
@@ -28,7 +28,7 @@ export default {
       'getRsltScrnVal',
       'getRsltScrnLeftVal',
       'getRsltScrnRghtVal',
-      'getRsltScrnSign'
+      'getRsltScrnOperator'
     ])
   }
 }
