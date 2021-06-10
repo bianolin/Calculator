@@ -1,10 +1,14 @@
 <template>
   <div class="PanelMain">
     <div class="PanelMainTopRcrd">
-      {{getRsltScrnLeftVal}}{{getRsltScrnOperator}}{{getRsltScrnRghtVal}}
+      <div class="PMTR_Screen">
+        {{getRsltScrnLeftVal}} {{getRsltScrnOperator}} {{getRsltScrnRghtVal}}
+      </div>
     </div>
     <div class="PanelMainTop">
-      {{getRsltScrnVal}}
+      <div class="PanelMainTopText">
+        {{getRsltScrnVal}}
+      </div>
     </div>
     <div class="PanelMainButtonArea">
       <CalculatorPanelBtnArea/>
@@ -45,7 +49,14 @@ export default {
     height: 8%;
     margin-left: 2%;
     margin-right: 2%;
-    background-color: aquamarine;
+
+    .PMTR_Screen{
+      margin: 0;
+      padding-top: 4%;
+      padding-right: 5%;
+      text-align: right;
+      font-size: 28px;
+    }
   }
   .PanelMainTop{
     height: 16%;
@@ -54,6 +65,12 @@ export default {
     margin-right: 2%;
     background-image: linear-gradient(lightgray, lightblue);
     border-radius: 3px;
+    .PanelMainTopText{
+      text-align: right;
+      padding-right: 5%;
+      padding-top: 7%;
+      font-size: 48px;
+    }
   }
   .PanelMainButtonArea{
     height: 66%;

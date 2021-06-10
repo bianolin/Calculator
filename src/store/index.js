@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    fResultScreenValue: null,
+    fResultScreenValue: 0,
     fResultScreenLeftValue: null,
     fResultScreenRghtValue: null,
     sResultScreenOperator: null,
@@ -68,7 +68,7 @@ export default new Vuex.Store({
       return;
     },
     mutClearMainAndUpScreem(state) {
-      state.fResultScreenValue = null,
+      state.fResultScreenValue = 0,
       state.fResultScreenLeftValue = null,
       state.fResultScreenRghtValue = null,
       state.sResultScreenOperator = null,
