@@ -11,7 +11,7 @@ export default new Vuex.Store({
     sResultScreenOperator: null,
     fDecimalValue: 0,
     aCalculationHistoryList: [],
-    oCalculationHistory: {
+    oTempCalculationHistory: {
       fLeftValue: null,
       fRghtValue: null,
       sOperator: '',
@@ -30,6 +30,9 @@ export default new Vuex.Store({
     },
     getRsltScrnOperator: state => {
       return state.sResultScreenOperator;
+    },
+    getCalculationHistoryList: state => {
+      return state.aCalculationHistoryList;
     }
   },
   mutations: {
@@ -90,7 +93,16 @@ export default new Vuex.Store({
     mutSetMainResultScreen(state, fScreenValue) {
       state.fResultScreenValue = fScreenValue;
       return;
-    } 
+    },
+    mutSetCalculationToHistory(state) {
+      state.oTempCalculationHistory.fLeftValue = state.fResultScreenLeftValue;
+      state.oTempCalculationHistory.fRghtValue = state.fResultScreenRghtValue;
+      state.oTempCalculationHistory.sOperator = state.sResultScreenOperator;
+      state.oTempCalculationHistory.fResultValue = state.fResultScreenValue;
+      state.aCalculationHistoryList.push(state.oTempCalculationHistory);
+      debugger;
+      return;
+    }
   },
   actions: {
     actNumBtnClicked( {state, commit}, iValue) {
@@ -122,6 +134,8 @@ export default new Vuex.Store({
         dispatch('actClrBtnClicked');
       }
       commit('mutSetMainResultScreen', fResult);
+      // Commit to history list
+      commit('mutSetCalculationToHistory');
     },
     actOperatorBtnClicked( {commit, state, dispatch}, sOperator) {
       if (sOperator === '=' && state.fResultScreenRghtValue != null) {
