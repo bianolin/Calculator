@@ -9,7 +9,14 @@ export default new Vuex.Store({
     fResultScreenLeftValue: null,
     fResultScreenRghtValue: null,
     sResultScreenOperator: null,
-    fDecimalValue: 0
+    fDecimalValue: 0,
+    aCalculationHistoryList: [],
+    oCalculationHistory: {
+      fLeftValue: null,
+      fRghtValue: null,
+      sOperator: '',
+      fResultValue: null
+    }
   },
   getters: {
     getRsltScrnVal: state => {
@@ -69,14 +76,20 @@ export default new Vuex.Store({
     },
     mutClearMainAndUpScreem(state) {
       state.fResultScreenValue = 0,
-      state.fResultScreenLeftValue = null,
-      state.fResultScreenRghtValue = null,
-      state.sResultScreenOperator = null,
+      state.fResultScreenLeftValue = null;
+      state.fResultScreenRghtValue = null;
+      state.sResultScreenOperator = null;
       state.fDecimalValue = 0
+      return;
+    },
+    mutClearLeftRightOperatorValue(state){
+      state.fResultScreenLeftValue = null;
+      state.fResultScreenRghtValue = null;
       return;
     },
     mutSetMainResultScreen(state, fScreenValue) {
       state.fResultScreenValue = fScreenValue;
+      return;
     } 
   },
   actions: {
@@ -92,26 +105,38 @@ export default new Vuex.Store({
       commit('mutClearMainAndUpScreem');
       
     },
-    actOperatorBtnClicked( {commit, state, dispatch}, sSign) {
-      if (sSign === '=') {
-        // Calculate
-        let fResult = 0;
-        if (state.sResultScreenOperator === '+') {
-          fResult = state.fResultScreenLeftValue + state.fResultScreenRghtValue;
-        } else if (state.sResultScreenOperator === '-') {
-          fResult = state.fResultScreenLeftValue - state.fResultScreenRghtValue;
-        } else if (state.sResultScreenOperator === '*') {
-          fResult = state.fResultScreenLeftValue * state.fResultScreenRghtValue;
-        } else if (state.sResultScreenOperator === '/') {
-          fResult = state.fResultScreenLeftValue / state.fResultScreenRghtValue;
-        } else if (state.sResultScreenOperator === '%') {
-          fResult = state.fResultScreenLeftValue / state.fResultScreenRghtValue / 100;
-        } else {
-          dispatch('actClrBtnClicked');
-        }
-        commit('mutSetMainResultScreen', fResult);
+    actCalculateResult({commit, state, dispatch}) {
+      // Calculate
+      let fResult = 0;
+      if (state.sResultScreenOperator === '+') {
+        fResult = state.fResultScreenLeftValue + state.fResultScreenRghtValue;
+      } else if (state.sResultScreenOperator === '-') {
+        fResult = state.fResultScreenLeftValue - state.fResultScreenRghtValue;
+      } else if (state.sResultScreenOperator === '*') {
+        fResult = state.fResultScreenLeftValue * state.fResultScreenRghtValue;
+      } else if (state.sResultScreenOperator === '/') {
+        fResult = state.fResultScreenLeftValue / state.fResultScreenRghtValue;
+      } else if (state.sResultScreenOperator === '%') {
+        fResult = state.fResultScreenLeftValue / state.fResultScreenRghtValue / 100;
       } else {
-        commit('mutSetCalculationScreenOperator', sSign);
+        dispatch('actClrBtnClicked');
+      }
+      commit('mutSetMainResultScreen', fResult);
+    },
+    actOperatorBtnClicked( {commit, state, dispatch}, sOperator) {
+      if (sOperator === '=' && state.fResultScreenRghtValue != null) {
+        dispatch('actCalculateResult');
+      } else if (sOperator === '=' && state.sResultScreenOperator === null) {
+        // do nothing
+      } else if (sOperator != '=' && state.sResultScreenOperator != null && state.fResultScreenRghtValue != null) {
+        // Calculate
+        dispatch('actCalculateResult').then( () =>  {
+          commit('mutClearLeftRightOperatorValue');
+          commit('mutSetLeftValue', state.fResultScreenValue);
+          commit('mutSetCalculationScreenOperator', sOperator);
+        });
+      } else {
+        commit('mutSetCalculationScreenOperator', sOperator);
       }
     },
     actResolveMainScreenDisplay() {

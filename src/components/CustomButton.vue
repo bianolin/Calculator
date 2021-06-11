@@ -41,7 +41,7 @@ export default {
     },
     onButtonClicked: function() {
       if (this.btnType === 'CusBtnMain_Num'){
-        this.actNumClick(this.btnText);
+        this.actNumClick(parseInt(this.btnText, 10));
       } else if (this.btnType === 'CusBtnMain_Sgn') {
         this.actOperatorBtnClick(this.btnText);
       } else {

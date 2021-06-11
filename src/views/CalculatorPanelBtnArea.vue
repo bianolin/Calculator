@@ -4,7 +4,7 @@
       <CustomButton v-for="(value, index) in 9" v-bind:key="index"
         :btn-text="10-value" btn-type="CusBtnMain_Num"/>
       <CustomButton btn-text="." btn-type="CusBtnMain_Num"/>
-      <CustomButton btn-text="0" btn-type="CusBtnMain_Num"/>
+      <CustomButton btn-text=0 btn-type="CusBtnMain_Num"/>
       <CustomButton is-empty-space/>
     </div>
     <div class="CPBA_Rght">
